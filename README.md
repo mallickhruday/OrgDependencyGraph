@@ -11,7 +11,7 @@ The output of this will be dumped into Neo4j so that you can query this as you w
 > TODO: This is incomplete, it will also require Neo4j connection details
 
 ```bash
-dotnet run "/Users/tugberk/apps/my-org"
+dotnet run "/Users/tugberk/apps/my-org" "http://localhost:7474/db/data" "neo4j" "neo4j"
 ```
 
 ## Limitations
