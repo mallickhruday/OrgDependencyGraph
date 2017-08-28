@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace OrgDependencyGraph
 {
@@ -6,7 +7,12 @@ namespace OrgDependencyGraph
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            // TODO: Validate the path
+            var basePath = args[0];
+            foreach (var item in Directory.GetFiles(basePath, "packages.config", SearchOption.AllDirectories))
+            {
+                System.Console.WriteLine(item);
+            }
         }
     }
 }
