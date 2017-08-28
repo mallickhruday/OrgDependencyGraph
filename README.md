@@ -25,6 +25,16 @@ Run the below comment by supplying the correct arguments:
 dotnet run "/Users/tugberk/apps/my-org" "http://localhost:7474/db/data" "neo4j" "neo4j"
 ```
 
+> You can start an instance of a Neo4j database through Docker by running the following command:
+>
+> ```bash
+> docker run \
+>    --publish=7474:7474 --publish=7687:7687 \
+>    --volume=$HOME/neo4j/data:/data \
+>    --volume=$HOME/neo4j/logs:/logs \
+>    neo4j:3.0
+>```
+
 ## Querying the Data
 
 The data should now be queryable through [Cypher Query Language](https://neo4j.com/developer/cypher-query-language/). Here are a few example of the things that you can find out:
