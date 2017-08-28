@@ -6,12 +6,43 @@ The output of this will be dumped into Neo4j so that you can query this as you w
 
 ## Preparation
 
+Clone all the repos under a folder. Do this by running the following bash script:
+
+```bash
+curl "https://api.github.com/orgs/{ORG-NAME}/repos?page=1&per_page=100&type=private&access_token={ACCESS-TOKEN-HERE}" | 
+    grep -e 'ssh_url*' | 
+    cut -d \" -f 4 | 
+    xargs -L1 git clone $1 --depth 1
+```
+
+Increment the page count for enough times to consume all the repos.
+
 ## Usage
 
-> TODO: This is incomplete, it will also require Neo4j connection details
+Run the below comment by supplying the correct arguments:
 
 ```bash
 dotnet run "/Users/tugberk/apps/my-org" "http://localhost:7474/db/data" "neo4j" "neo4j"
+```
+
+## Querying the Data
+
+The data should now be queryable through [Cypher Query Language](https://neo4j.com/developer/cypher-query-language/). Here are a few example of the things that you can find out:
+
+### Count of Package Dependencies
+
+```cypher
+MATCH (pack:Package)<-[:DEPENDS_ON]-(proj:Project)
+RETURN pack.id, count(proj)
+ORDER BY count(proj) DESC
+```
+
+### A Particular Dependency and Its Projects
+
+```cypher
+MATCH (p:Project)-[:DEPENDS_ON]->(pack:Package)
+WHERE pack.id = "Newtonsoft.Json"
+RETURN p, pack
 ```
 
 ## Limitations
