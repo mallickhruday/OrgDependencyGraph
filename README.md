@@ -57,4 +57,5 @@ RETURN p, pack
 
 ## Limitations
 
+ - You cannot currently walk the dependency hierarchy with this since it only records the top level dependencies.
  - .NET Core SDK project system is not supported. This omly works for `packages.config` files.
